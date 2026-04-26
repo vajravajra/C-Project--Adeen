@@ -35,9 +35,12 @@ void caesarDecrypt(char text[], int shift)
 
 void printPreview(char text[]) 
 {
-    for (int i = 0; i < 20 || text[i] == '\0'; i++)
+    for (int i = 0; i < 20 && text[i] != '\0'; i++)
     {
-        printf("%c", text[i]);
+        if ((text[i] >= 32 && text[i] <= 126))  // printable ASCII
+            printf("%c", text[i]);
+        else
+            printf(".");  
     }
     printf("...\n");
 }
@@ -65,6 +68,7 @@ int main()
 
             printf("Enter text: ");
             fgets(text, sizeof(text), stdin);
+            text[strcspn(text, "\n")] = '\0'; //Replace \n with \0
 
             printf("Enter shift: ");
             scanf("%d", &shift);
@@ -77,11 +81,12 @@ int main()
 
         else if (choice == 2) 
         {
-            char text[200], temp[200];
+            char text[200];
             int subchoice;
 
             printf("Enter encrypted text: ");
             fgets(text, sizeof(text), stdin);
+            text[strcspn(text, "\n")] = '\0'; //Replace \n with \0
 
             printf("\nChoose method:\n");
             printf("1. Known Shift\n");
@@ -122,7 +127,7 @@ int main()
                 printf(">> ");
                 scanf("%d", &pick);
 
-                if (pick >= 1 && pick <= 26) 
+                if (pick >= 1 && pick <= 25) 
                 {
                     printf("Full Decrypted Message: %s\n", results[pick]);
                 } 
