@@ -9,7 +9,7 @@ void caesarEncrypt(char text[], int shift)
         {
             text[i] = ((text[i] - 'A' + shift) % 26) + 'A'; //Encryption formula for Capital Letters 
         }
-        
+
         else if (text[i] >= 'a' && text[i] <= 'z')
         {
             text[i] = ((text[i] - 'a' + shift) % 26) + 'a'; //Encryption formula for Lowercase Letters 
@@ -104,7 +104,9 @@ int main()
             else if (subchoice == 2) 
             {
                 char results[26][200];
-
+                strcpy(results[0], text);
+                printf("\n Original:");
+                printPreview(results[0]);
                 printf("\nDecrypted text Preview\nChoose the correct one:\n");
 
                 for (int s = 1; s < 26; s++) 
